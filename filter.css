@@ -1,0 +1,99 @@
+#myInput {
+    /*background-image: url('/css/searchicon.png');  Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+  }
+  
+  #myUL {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #myUL li a {
+    border: 1px solid #0c1a30; /* Add a border to all links */
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #dea3a9; /* Grey background color */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove default text underline */
+    font-size: 18px; /* Increase the font-size */
+    color: black; /* Add a black text color */
+    display: block; /* Make it into a block element to fill the whole list */
+  }
+  
+  #myUL li a:hover:not(.header) {
+    background-color: #eee; /* Add a hover effect to all links, except for headers */
+  }
+
+  /*.pokemon-card {
+    background-color: #d67fc6;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    width: 300px;
+    margin-top: 20px;
+}*/
+.card-header {
+    background-color: #36f43c;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+.card-header h2 {
+    margin: 0;
+    text-transform: capitalize;
+}
+.card-body {
+    padding: 20px;
+    text-align: center;
+}
+.card-body img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 15px;
+}
+.card-info {
+    background-color: #5fabcb;
+    border-top: 1px solid #f57070;
+    padding: 15px;
+}
+.card-info p {
+    margin: 5px 0;
+    text-align: left;
+}
+.type-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 2px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    color: rgb(141, 132, 189);
+}
+
+
+form {
+  background-color:#FACB08;
+  max-height: 200px;
+  max-width: 500px;
+  border-radius: 10px;
+  border: 3px solid #2E6DB4;
+}
+
+#form-container {
+  border: 8px solid #2E6DB4;
+}
+
+.custom-card-background {
+  background-color: #371745; 
+}
+
+.form-control{
+  background-color: #2E6DB4;
+}
+

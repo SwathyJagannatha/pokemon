@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous"
+   />
+
+    <title>Pokemon Search</title>
+    <link rel="sylesheet" href="filter.css">
+    <link rel="sylesheet" href="styles.css">
+
+    <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: linear-gradient(pink,purple);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                background: url('imgpoke.jpg') no-repeat center ;
+                background-size: cover;
+               
+            }
+
+          /*  body nav:hover{
+                filter: grayscale(50%) blur(3px) brightness(0.8);
+            }*/
+
+        #myInput {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #myUL {
+            /* Remove default list styling */
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+          }
+          
+          #myUL li a {
+            border: 3px solid #0c1a30; /* Add a border to all links */
+            margin-top: -1px; /* Prevent double borders */
+            background-color: #6b9fd3; /* Grey background color */
+            padding: 12px; /* Add some padding */
+            text-decoration: none; /* Remove default text underline */
+            font-size: 18px; /* Increase the font-size */
+            color: black; /* Add a black text color */
+            display: block; /* Make it into a block element to fill the whole list */
+            width: 400px;
+          }
+          
+          #myUL li a:hover:not(.header) {
+            background-color: #eee; /* Add a hover effect to all links, except for headers */
+          }
+
+        .pokemon-card {
+            background: linear-gradient(rgb(16, 36, 35),rgb(155, 227, 107));
+            border-radius: 10px;
+            box-shadow: 2px 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 400px;
+            margin-top: 20px;
+            height: 450px;
+            box-shadow: 5px 5px;
+        }
+        .card-header {
+            background-color: #e687eb;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            color: black;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+        .card-header h2 {
+            margin: 0;
+            text-transform: capitalize;
+        }
+        .card-body {
+            padding: 20px;
+            text-align: center;
+        }
+        .card-body img {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 15px;
+        }
+        .card-info {
+            background-color: #f9f9f9;
+            border-top: 1px solid #eee;
+            padding: 15px;
+        }
+        .card-info p {
+            margin: 5px 0;
+            text-align: left;
+        }
+        .type-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 2px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            color: white;
+        }
+        .statsTable{
+            height:500px;
+            width : 500px;
+            border-radius: 5px;
+            border-style: dotted;
+        }
+
+        .stats-table {
+            align-items: center;
+            width: 200px;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: large;
+        }
+        
+        .stats-table th, .stats-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 4px solid #735f98;
+        }
+        
+        .stats-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            color: #333;
+        }
+        
+        .stats-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .stats-table tr:hover {
+            background-color: #34a3d2;
+        }
+        
+        .stat-progress {
+            height: 20px;
+            border-radius: 10px;
+            background-color: #e9ecef;
+        }
+        
+        .stat-progress-bar {
+            height: 100%;
+            border-radius: 10px;
+            background-color: #007bff;
+            transition: width 0.6s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav
+          class="navbar navbar-expand-lg navbar-dark"
+          style="background: linear-gradient(rgb(130, 84, 230), rgb(236, 95, 35))"
+        >
+          <div class="container-fluid">
+            <!-- Navbar brand (title, image, or both) -->
+            <a class="navbar-brand d-flex align-items-center" href="pokemon.html">
+            <img src="poki.jpg" style="height: 10%; width: 10%;" alt="Logo">
+            <span class="ms-2 text">Pokemon Page</span>
+            </a>
+            <!-- Navbar toggle for collapsing  -->
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+  
+            <!-- Collapsable content -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <!-- navbar-nav - holds list of navbar links -->
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- nav-items is the class for an item in the nav bar -->
+                <li class="nav-item">
+                  <!-- nav-link for identifying links and active if active, disabled if not -->
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./pokeHome.html">Pokemon Dashboard</a>
+                </li>
+              </ul>
+            </div>
+            
+              <!-- Form for our search bar -->
+              <form class="d-flex">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button class="btn btn-outline-success" type="submit">
+                  Search
+                </button>
+              </form>
+            </div>
+          </div>
+        </nav>     
+      </header>
+      
+    <input
+        type="text"
+        id="myInput"
+        oninput="myFunction(event)"
+        placeholder="Search for Pokemon Characters.." 
+        title="Type in a name">
+
+    <ul id="myUL">
+        <li><a href="#">Bulbasaur</a></li>
+        <li><a href="#">Ivysaur</a></li>
+        <li><a href="#">Squirtle</a></li>
+        <li><a href="#">Raticate</a></li>
+        <li><a href="#">Pikachu</a></li>
+    </ul>
+
+    <!--<div id="pokemonDisplay"></div>-->
+
+    <div class="card">
+        <h1 class="h3" style="font-size:26px;font-style:italic;font-family:'Times New Roman', Times, serif;text-align:center">Pokemon Character Information</h1>
+        <div class ="row">
+        <div class="col">
+        <div id="pokemonDisplay" style="background:linear-gradient(rgb(7, 16, 18),rgb(194, 51, 51));"></div>
+        </div>
+         <div class="col">
+           <div class="card">
+            <div class="card-body" style="background:linear-gradient(green,rgb(103, 103, 214));">
+                <h5 class="card-title" style="font-size:20px;font-family:Arial, Helvetica, sans-serif;background:linear-gradient(violet,yellow)">Base Stats</h5>
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Stat</th>
+                            <th>Value</th>
+                            <th>Efforts</th>
+                            <th>Progress Bar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statsTable">
+                        <!-- Stats will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+          </div>
+          </div>
+          </div>
+          </div>
+       </div>
+
+        <div id="abilityList"></div>
+
+        <div id="movesList"></div>
+    </div>
+
+    <script>
+        console.log("Script loaded"); // Check if script is loaded
+
+        async function myFunction(event) {
+            event.preventDefault();
+            let search_term = event.target.value.toLowerCase();
+            console.log("Search term:", search_term); // Log search term
+            
+            if (search_term) {
+                try {
+                    console.log("Fetching data for:", search_term); // Log before fetch
+                    const pokemonData = await fetchPokemonData(search_term);
+                    console.log("Fetched Pokemon data:", pokemonData); // Log fetched data
+                    //displayPokemonData(pokemonData);
+                    displayPokemonCard(pokemonData);
+                } catch (error) {
+                    console.error("Error fetching Pokemon data:", error);
+                }
+            }
+            
+            filterList(search_term);
+        }
+
+        async function fetchPokemonData(pokemonName) {
+            console.log("Fetching from URL:", `https://pokeapi.co/api/v2/pokemon/${pokemonName}`); // Log URL
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const pokemonData = await response.json();
+            return pokemonData;
+        }
+
+        function filterList(search_term) {
+            console.log("Filtering list for:", search_term); // Log filtering
+            const ul = document.getElementById("myUL");
+            const li = ul.getElementsByTagName("li");
+            
+            for (let i = 0; i < li.length; i++) {
+                const a = li[i].getElementsByTagName("a")[0];
+                const txtValue = a.textContent || a.innerText;
+                if (txtValue.toLowerCase().indexOf(search_term) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+
+        function displayPokemonData(pokemondata) {
+            console.log("Displaying data for:", pokemondata.name); // Log display
+            let nameval = pokemondata.name;
+            const displayArea = document.getElementById('pokemonDisplay');
+            displayArea.innerHTML = `
+        
+                <h2>${pokemondata.name}<h2> 
+                <img src="${pokemondata.sprites.front_default}"> 
+                <h3>Abilities: </h3>
+                <ul>
+                  ${pokemondata.abilities.map(arrayItem => `<li>${arrayItem.ability.name}</li>`).join('')}
+                </ul>
+                <h3>Base Experience: </h3>
+                <p>${pokemondata.base_experience}</p> 
+                <h3>First Pikachu Move</h3>
+                <p>${pokemondata.moves[0].move.name}</p>
+            
+                <h3>ALL Pikachu Move</h3>
+                <ul>${pokemondata.moves.map(moveItem => `<li>${moveItem.move.name}</li>`).join('')}</ul>
+
+                `;
+        }
+
+        function displayPokemonDataNew(pokemondata) {
+            console.log("New display function!!")
+            console.log("Displaying data for:", pokemondata.name); // Log display
+            let nameval = pokemondata.name;
+            const displayArea = document.getElementById('pokemonDisplay');
+            displayArea.innerHTML = `
+            <div class = "pokemon-card" style="width: 18rem;">
+                <div class="card-header">
+                    <h2>${pokemondata.name}<h2> 
+                    <img src="${pokemondata.sprites.front_default}"> 
+                </div>
+
+                <div class="card-body">
+                    <h3 class ="card-title">Abilities: </h3>
+                    <ul class="list-group list-group-flush">
+                        ${pokemondata.abilities.map(arrayItem => `<li class ="list-group-item">${arrayItem.ability.name}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="card-body">
+                    <h3 class="card-title">Base Experience: </h3>
+                    <p class="card-text">${pokemondata.base_experience}</p> 
+                    <h3 class="card-title>First Pikachu Move</h3>
+                    <p class="card-text>${pokemondata.moves[0].move.name}</p>
+                </div>
+
+                <!--<h3>ALL Pikachu Move</h3>
+                <ul>${pokemondata.moves.map(moveItem => `<li>${moveItem.move.name}</li>`).join('')}</ul> -->
+            </div>
+            `;
+        }
+
+        function displayPokemonCard(data) {
+            const typeColors = {
+                normal: "#A8A878", fire: "#F08030", water: "#6890F0", electric: "#F8D030", grass: "#78C850",
+                ice: "#98D8D8", fighting: "#C03028", poison: "#A040A0", ground: "#E0C068", flying: "#A890F0",
+                psychic: "#F85888", bug: "#A8B820", rock: "#B8A038", ghost: "#705898", dragon: "#7038F8",
+                dark: "#705848", steel: "#B8B8D0", fairy: "#EE99AC"
+            };
+
+            const displayArea = document.getElementById('pokemonDisplay');
+            displayArea.innerHTML = `
+                <div class="pokemon-card">
+                    <div class="card-header">
+                        <h2>${data.name}</h2>
+                    </div>
+                    <div class="card-body">
+                        <img src="${data.sprites.front_default}" alt="${data.name}">
+                        <div>
+                            ${data.types.map(type => `
+                                <span class="type-badge" style="background-color: ${typeColors[type.type.name]}">
+                                    ${type.type.name}
+                                </span>
+
+                                <span class="type-badge" style="background-color: ${typeColors[type.type.name]}">
+                                    ${type.type.name}
+                                </span>
+
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <p><strong>Height:</strong> ${data.height / 10} m</p>
+                        <p><strong>Weight:</strong> ${data.weight / 10} kg</p>
+                        <p><strong>Abilities:</strong> ${data.abilities.map(ability => ability.ability.name).join(', ')}</p>
+                    </div>
+                </div>
+            `;
+
+            const statsTable = document.getElementById('statsTable');
+            statsTable.innerHTML = '';
+            data.stats.forEach(stat=>{
+                const row =`
+                    <tr>
+                        <td>${stat.stat.name}</td>
+                        <td>${stat.effort}</td>
+                        <td>${stat.base_stat}</td>
+                        <td>
+                            <div class="stat-progress">
+                            <div class="stat-progress-bar" style="width: ${stat.base_stat / 2}%;" aria-valuenow="${stat.base_stat}" aria-valuemin="0" aria-valuemax="200"></div>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+
+                statsTable.innerHTML += row;
+            });
+        }
+
+        // Test log
+        console.log("Script fully loaded and executed");
+    </script>
+</body>
+</html>
